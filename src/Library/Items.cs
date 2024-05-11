@@ -1,45 +1,27 @@
-   public void EquiparArma(Arma arma)
-   {
-       equipamiento.Add(arma);
-       AtaqueTotal += arma.ValorAtaque;
-   }
+public class Arma
+{
+    public string Nombre { get; set; }
+    public bool EsMagico { get; set; }
+    public int ValorAtaque { get; set; }
 
-   public void EquiparDefensa(Defensa defensa)
-   {
-       equipamiento.Add(defensa);
-       DefensaTotal += defensa.ValorDefensa;
-   }
+    public Arma(string nombre, bool esMagico, int valorAtaque)
+    {
+        Nombre = nombre;
+        EsMagico = esMagico;
+        ValorAtaque = valorAtaque;
+    }
+}
 
-   public void EquiparArmaDefensa(ArmaDefensa armaDefensa)
-   {
-       equipamiento.Add(armaDefensa);
-       AtaqueTotal += armaDefensa.ValorAtaque;
-       DefensaTotal += armaDefensa.ValorDefensa;
-   }
+public class Defensa
+{
+    public string Nombre { get; set; }
+    public bool EsMagico { get; set; }
+    public int ValorDefensa { get; set; }
 
-   public override int AtaqueTotal
-   {
-       get
-       {
-           int ataqueTotal = base.AtaqueTotal;
-           foreach (Elemento elemento in equipamiento)
-           {
-               ataqueTotal += elemento.ValorAtaque;
-           }
-           return ataqueTotal;
-       }
-   }
-
-   public override int DefensaTotal
-   {
-       get
-       {
-           int defensaTotal = base.DefensaTotal;
-           foreach (Elemento elemento in equipamiento)
-           {
-               defensaTotal += elemento.ValorDefensa;
-           }
-           return defensaTotal;
-       }
-   }
+    public Defensa(string nombre, bool esMagico, int valorDefensa)
+    {
+        Nombre = nombre;
+        EsMagico = esMagico;
+        ValorDefensa = valorDefensa;
+    }
 }
