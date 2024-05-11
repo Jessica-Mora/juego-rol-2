@@ -1,78 +1,59 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using interfaces;
 
-public class Personaje  
-{   public string nombre;
-    public int vida;
-    public int ataque;
-    public int defensa;
-    public List<Elemento> Elementos {get; set;}
-
-    public Personaje(string nombre, int vida, int ataque, int defensa){
-        this.nombre = nombre;
-        this.vida = vida;
-        this.ataque = ataque;
-        this.defensa = defensa;
-
-       this.Elementos = new List<Elemento> ();
-    }
-
-    public Personaje(string nombre, int vida)
+namespace combate
+{
+    public class Personaje
     {
-        this.nombre = nombre;
-        this.vida = vida;
-    }
+        public string nombre;
+        public int vida;
+        public int ataque;
+        public int defensa;
+        private Arma armaEquipada;
+        private Defensa defensaEquipada;
 
-    public string GetNombre(){
-        return nombre; 
-    }
-    public int GetVida(){
-        return  vida;
-    }
-    public int SetVida(){
-        return vida;
-    }
-    //
-    public int GetAtaque(){
-        return  ataque;
-    }
-    public int SetAtaque(){
-        return ataque;
-    }
-    //
-    public int GetDefensa(){
-        return  defensa;
-    }
-    public int SetDefesa(){
-        return defensa;
-    }
-    ////////////////////
-    public void AgregarElemento(Elemento elemento)
-    {
-        Elementos.Add(elemento);
-    }
-    public void QuitarElemento(Elemento elemento)
-    {
-        Elementos.Remove(elemento);
-    }
-    //////
-    public int DefensaTotal()
-    {
-        int defensaTotal = GetDefensa();
-        foreach (Elemento elemento in Elementos)
+        public Personaje(string nombre, int vida, int ataque, int defensa)
+        {
+            this.nombre = nombre;
+            this.vida = vida;
+            this.ataque = ataque;
+            this.defensa = defensa;
+        }
+
+        public string GetNombre()
+        {
+            return nombre;
+        }
+
+        public int AtaqueTotal()
+        {
+            int ataqueTotal = ataque;
+            if (armaEquipada != null)
             {
-                defensaTotal += elemento.GetDefensa();
+                ataqueTotal += armaEquipada.ValorAtaque;
             }
-        return defensaTotal;
-    }
-    public int AtaqueTotal()
-    {
-        int ataqueTotal = GetAtaque();
-        foreach (Elemento elemento in Elementos)
+            return ataqueTotal;
+        }
+
+        public int DefensaTotal()
+        {
+            int defensaTotal = defensa;
+            if (defensaEquipada != null)
             {
-                ataqueTotal += elemento.GetAtaque();
+                defensaTotal += defensaEquipada.ValorDefensa;
             }
-        return ataqueTotal;
+            return defensaTotal;
+        }
+
+        public void EquiparArma(Arma arma)
+        {
+            armaEquipada = arma;
+        }
+
+        public void EquiparDefensa(Defensa defensa)
+        {
+            defensaEquipada = defensa;
+        }
     }
-
-
-}
